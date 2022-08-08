@@ -16,48 +16,61 @@ $(document).on('click','#sendTask', function(e){
         $(e.target).addClass('disabled');
         $(e.target).css('cursor','not-allowed');
 
-        $.ajax({
-            url: $('#formTask').attr('action'),
-            type: 'POST', 
-            data: {'_token': $('#formTask').find("[name=_token]").val(), 'tarefa': task}, 
-            dataType: 'json',
-            success: function(response){
-                console.log(response)
-                // $('#myTabContent').append(`
-                //     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                //         ${response.msg}
-                //         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                //             <span aria-hidden="true">&times;</span>
-                //         </button>
-                //     </div>
-                // `);
+        if($('#id_user').length){
+            $.ajax({
+                url: $('#formTask').attr('action'),
+                type: 'POST',
+                data: {'_token': $('#formTask').find("[name=_token]").val(), 'tarefa': task},
+                dataType: 'json',
+                success: function(response){
 
-                // $('#task').val('');
-                // $('#home-tab').click();
-                // $('#taskList').append(`
-                //     <li class="list-group-item d-flex justify-content-between">
-                //         <div>
-                //             ${task}
-                //         </div>
-                //         <div>
-                //             <button class="btn btn-sm undone"><i class="fa-regular fa-circle-check"></i></button>
-                //             <button class="btn btn-sm"><i class="fa-solid fa-trash-can"></i></button>
-                //         </div>
-                //     </li>`
-                // );
-            }, error: function(error){
-                console.log(error)
-                // $('#myTabContent').append(`
-                //     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                //         ${error.msg}
-                //         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                //             <span aria-hidden="true">&times;</span>
-                //         </button>
-                //     </div>
-                // `);
-            }
-        });
+                    $('#home').prepend(`
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            ${response.msg}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    `);
+                    addTask(task);
 
-       
+                    setTimeout(function() {
+                        $( ".alert" ).slideUp( "slow");
+                    }, 2000);
+
+                }, error: function(error){
+                    $('#myTabContent').append(`
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            ${error.msg}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    `);
+                }
+            });
+        }else{
+            addTask(task);
+        }
+        $(e.target).removeClass('disabled');
+        $(e.target).css('cursor','pointer');
+
     }
 })
+
+function addTask(task){
+    if($('#taskList').find('p')){ $('#taskList').find('p').remove(); }
+    $('#task').val('');
+    $('#home-tab').click();
+    $('#taskList').append(`
+        <li class="list-group-item d-flex justify-content-between">
+            <div>
+                ${task}
+            </div>
+            <div>
+                <button class="btn btn-sm undone"><i class="fa-regular fa-circle-check"></i></button>
+                <button class="btn btn-sm"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+        </li>`
+    );
+}

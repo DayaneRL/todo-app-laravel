@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Models;
-use App\Models\User;
 
-class Task extends Authenticatable
+use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
+
+class Tasks extends Model
 {
 
     protected $fillable = [
