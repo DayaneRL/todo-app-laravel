@@ -9,7 +9,7 @@
 
 ## Projeto em laravel Projeto integrado II ADS
 
-Usuário convidados podem cadastrar tarefas.<br/><br/>
+Usuário convidados podem cadastrar tarefas que serão perdidas ao atualizar a página.<br/><br/>
 
 Ao se cadastrar/logar podem cadastrar tarefas que ficaram salvas em seu perfil.<br/>
 A mudança de status (feito/ não feito) também são salvas no perfil do usuário.<br/>
