@@ -27,12 +27,13 @@
                                     @if($user->tasks->count())
                                         @foreach($user->tasks as $taskItem)
                                         <li class="list-group-item d-flex justify-content-between">
+                                            <input type="hidden" class="id_task" value={{$taskItem->id}}>
                                             <div>
                                                 {{$taskItem->task}}
                                             </div>
                                             <div>
-                                                <button class="btn btn-sm undone"><i class="fa-regular fa-circle-check"></i></button>
-                                                <button class="btn btn-sm" id="taskItem-{{$taskItem->id}}"><i class="fa-solid fa-trash-can"></i></button>
+                                                <button class="btn btn-sm {{$taskItem->status==0?'done':'undone'}}"><i class="{{$taskItem->status==0?'fa-regular fa-circle-check':'fa-solid fa-circle-check'}}"></i></button>
+                                                <button class="btn btn-sm taskItem-delete"><i class="fa-solid fa-trash-can"></i></button>
                                             </div>
                                         </li>
                                         @endforeach

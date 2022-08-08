@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tasks extends Model
 {
@@ -12,6 +13,7 @@ class Tasks extends Model
         'task',
         'user_id',
     ];
+    use SoftDeletes;
 
     public function user()
     {

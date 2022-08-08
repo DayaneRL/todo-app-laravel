@@ -1,14 +1,36 @@
-$(document).on('click', '.undone', function(){
-    $(this).find('i').attr('class', 'fa-solid fa-circle-check');
-    $(this).removeClass('undone');
-    $(this).addClass('done');
-})
-
 $(document).on('click', '.done', function(){
-    $(this).find('i').attr('class', 'fa-regular fa-circle-check');
+    $(this).find('i').attr('class', 'fa-solid fa-circle-check');
     $(this).removeClass('done');
     $(this).addClass('undone');
+
+    if($('#id_user').length){
+        let id = $(this).parents('.list-group-item').find('.id_task').val();
+        changeStatus(id, 1);
+    }
 })
+
+$(document).on('click', '.undone', function(){
+    $(this).find('i').attr('class', 'fa-regular fa-circle-check');
+    $(this).removeClass('undone');
+    $(this).addClass('done');
+
+    if($('#id_user').length){
+        let id = $(this).parents('.list-group-item').find('.id_task').val();
+        changeStatus(id, 0);
+    }
+})
+
+function changeStatus(id, status){
+    $.ajax({
+        url: $('#formTask').attr('action')+'/changeStatus/'+id,
+        type: 'PATCH',
+        data: {'_token': $('#formTask').find("[name=_token]").val(), 'id': id, 'status': status},
+        dataType: 'json',
+        success: function(response){
+            console.log(response.msg);
+        }
+    });
+}
 
 $(document).on('click','#sendTask', function(e){
     let task = $('#task').val();
@@ -74,3 +96,27 @@ function addTask(task){
         </li>`
     );
 }
+
+$(document).on('click', '.taskItem-delete', function(e){
+    let id = $(this).parents('.list-group-item').find('.id_task').val();
+
+    $.ajax({
+        url: window.location+id,
+        type: 'DELETE',
+        data: {'_token': $('#formTask').find("[name=_token]").val()},
+        dataType: 'json',
+        success: function(){
+            console.log(response.msg);
+            $(e.target).parents('.list-group-item').slideUp("slow");
+            setTimeout(function() {
+                $(e.target).parents('.list-group-item').remove();
+            }, 500);
+        }
+    });
+
+    if($('#taskList').find('.list-group-item').length==1){
+        setTimeout(function() {
+            $('#taskList').append('<p>Você ainda não possui nenhuma tarefa registrada em sua conta.</p>');
+        }, 1000);
+    }
+})

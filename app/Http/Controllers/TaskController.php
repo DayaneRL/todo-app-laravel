@@ -42,4 +42,39 @@ class TaskController extends Controller
             ]);
         }
     }
+
+    public function changeStatus(Request $request, $id)
+    {
+        try {
+            $task = Tasks::find($id);
+            $task->status = $request['status'];
+            $task->update();
+            return response()->json([
+                'status'=>200,
+                'msg'=> 'Tarefa atualizada com sucesso'
+            ]);
+        }  catch (\Exception $e) {
+            return response()->json([
+                'status'=> 500,
+                'msg'   => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $task = Tasks::find($id);
+            $task->delete();
+            return response()->json([
+                'status'=>200,
+                'msg'=> 'Tarefa excluída com sucesso'
+            ]);
+        }  catch (\Exception $e) {
+            return response()->json([
+                'status'=> 500,
+                'msg'   => $e->getMessage()
+            ]);
+        }
+    }
 }

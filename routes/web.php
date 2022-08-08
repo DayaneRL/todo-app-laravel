@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\TaskController;
 
 /*
@@ -15,6 +16,8 @@ use App\Http\Controllers\TaskController;
 */
 
 Route::resource('/', TaskController::class);
+Route::patch('/changeStatus/{id}', [TaskController::class, 'changeStatus']);
+Route::delete('/{id}', [TaskController::class, 'destroy']);
 
 Auth::routes();
 

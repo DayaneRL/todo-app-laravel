@@ -9,8 +9,16 @@
 
 ## Projeto em laravel Projeto integrado II
 
-TO DO:
+Usuário convidados podem cadastrar tarefas.<br/><br/>
 
--controllers
--validacoes
+Ao se cadastrar/logar podem cadastrar tarefas que ficaram salvas em seu perfil.<br/>
+A mudança de status (feito/ não feito) também são salvas no perfil do usuário.<br/>
+O usuário pode apagar tarefas a qualquer momento.
 
+#Ao baixar o projeto
+
+Se estiver com PHP ^7.4 instalado, só é necessário baixar o projeto e rodar os comandos:<br/>
+-composer install<br/>
+-cp .env.example .env <br/>
+-php artisan migrate<br/>
+-php artisan serve
