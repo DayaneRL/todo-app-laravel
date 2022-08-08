@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Projeto em laravel Projeto integrado II
+## Projeto em laravel Projeto integrado II ADS
 
 Usuário convidados podem cadastrar tarefas.<br/><br/>
 
@@ -15,7 +15,7 @@ Ao se cadastrar/logar podem cadastrar tarefas que ficaram salvas em seu perfil.<
 A mudança de status (feito/ não feito) também são salvas no perfil do usuário.<br/>
 O usuário pode apagar tarefas a qualquer momento.
 
-#Ao baixar o projeto
+## Ao baixar o projeto
 
 Se estiver com PHP ^7.4 instalado, só é necessário baixar o projeto e rodar os comandos:<br/>
 -composer install<br/>
