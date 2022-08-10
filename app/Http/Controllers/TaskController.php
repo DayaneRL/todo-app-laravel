@@ -33,7 +33,8 @@ class TaskController extends Controller
             }
             return response()->json([
                 'status'=>200,
-                'msg'=> 'Cadastrado com sucesso'
+                'msg'=> 'Cadastrado com sucesso',
+                'id' => $task->id
             ]);
         }  catch (\Exception $e) {
             return response()->json([

@@ -54,7 +54,7 @@ $(document).on('click','#sendTask', function(e){
                             </button>
                         </div>
                     `);
-                    addTask(task);
+                    addTask(task, response.id);
 
                     setTimeout(function() {
                         $( ".alert" ).slideUp( "slow");
@@ -72,7 +72,7 @@ $(document).on('click','#sendTask', function(e){
                 }
             });
         }else{
-            addTask(task);
+            addTask(task, '');
         }
         $(e.target).removeClass('disabled');
         $(e.target).css('cursor','pointer');
@@ -80,18 +80,19 @@ $(document).on('click','#sendTask', function(e){
     }
 })
 
-function addTask(task){
+function addTask(task, id){
     if($('#taskList').find('p')){ $('#taskList').find('p').remove(); }
     $('#task').val('');
     $('#home-tab').click();
     $('#taskList').append(`
         <li class="list-group-item d-flex justify-content-between">
+            <input type="hidden" class="id_task" value="${id}">
             <div>
                 ${task}
             </div>
             <div>
-                <button class="btn btn-sm undone"><i class="fa-regular fa-circle-check"></i></button>
-                <button class="btn btn-sm"><i class="fa-solid fa-trash-can"></i></button>
+                <button class="btn btn-sm done"><i class="fa-regular fa-circle-check"></i></button>
+                <button class="btn btn-sm taskItem-delete"><i class="fa-solid fa-trash-can"></i></button>
             </div>
         </li>`
     );
@@ -100,19 +101,26 @@ function addTask(task){
 $(document).on('click', '.taskItem-delete', function(e){
     let id = $(this).parents('.list-group-item').find('.id_task').val();
 
-    $.ajax({
-        url: window.location+id,
-        type: 'DELETE',
-        data: {'_token': $('#formTask').find("[name=_token]").val()},
-        dataType: 'json',
-        success: function(){
-            console.log(response.msg);
-            $(e.target).parents('.list-group-item').slideUp("slow");
-            setTimeout(function() {
-                $(e.target).parents('.list-group-item').remove();
-            }, 500);
-        }
-    });
+    if(id){
+        $.ajax({
+            url: window.location+id,
+            type: 'DELETE',
+            data: {'_token': $('#formTask').find("[name=_token]").val()},
+            dataType: 'json',
+            success: function(response){
+                console.log(response.msg);
+                $(e.target).parents('.list-group-item').slideUp("slow");
+                setTimeout(function() {
+                    $(e.target).parents('.list-group-item').remove();
+                }, 500);
+            }
+        });
+    }else{
+        $(e.target).parents('.list-group-item').slideUp("slow");
+        setTimeout(function() {
+            $(e.target).parents('.list-group-item').remove();
+        }, 500);
+    }
 
     if($('#taskList').find('.list-group-item').length==1){
         setTimeout(function() {
