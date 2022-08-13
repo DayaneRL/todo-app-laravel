@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title') | To Do</title>
+    <title>@yield('title') | Lista de Tarefas</title>
 
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
@@ -52,9 +52,22 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                <a class="nav-link" href="{{route('dashboard.index')}}">
+                    <i class="fa-solid fa-notes-medical"></i>
                     <span>Dashboard</span></a>
+            </li>
+            <hr class="sidebar-divider">
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('notebooks.index')}}">
+                    <i class="fa-regular fa-clipboard"></i>
+                    <span>Cadernos</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('users.index')}}">
+                    <i class="fa-solid fa-user-group"></i>
+                    <span>Usuários</span></a>
             </li>
 
             <!-- Divider -->

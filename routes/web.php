@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\{TaskController, UsersController, DashboardController};
+use App\Http\Controllers\{TaskController, UsersController, DashboardController, NotebookController};
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +22,7 @@ Route::delete('/{id}', [TaskController::class, 'destroy']);
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', UsersController::class)->middleware('role:admin');
     Route::resource('dashboard', DashboardController::class)->middleware('role:user');
+    Route::resource('notebooks', NotebookController::class)->middleware('role:user');
 });
 
 Auth::routes();
