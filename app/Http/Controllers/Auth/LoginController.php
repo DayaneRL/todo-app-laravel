@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Services\UserService;
 
 class LoginController extends Controller
 {
@@ -34,13 +35,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if ($user->role == 'admin')
-        {
-            return redirect()->route('users.index');
-        }
-        else if ($user->role == 'user')
-        {
-            return redirect()->route('dashboard.index');
-        }
+        $userRole = $user->role;
+        return redirect(UserService::getRouteUserRole($userRole));
     }
 }

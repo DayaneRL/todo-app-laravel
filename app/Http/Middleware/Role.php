@@ -5,22 +5,15 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\UserService;
 
 class Role
 {
-
     public function handle(Request $request, Closure $next, $role)
     {
         $userRole = Auth::user()->role;
         if($userRole !== $role){
-            if ($userRole == 'admin')
-            {
-                return redirect()->route('users.index');
-            }
-            else if ($userRole == 'user')
-            {
-                return redirect()->route('dashboard.index');
-            }
+            return redirect(UserService::getRouteUserRole($userRole));
         }
 
         return $next($request);
