@@ -12,7 +12,7 @@ class TaskController extends Controller
     public function index()
     {
         $user = User::find(Auth::user()->id ?? null);
-        $tasks = isset($user) ? $user->tasks()->get() : null;
+        // $tasks = isset($user) ? $user->tasks()->get() : null;
 
         return view('tasks.index', compact('user'));
     }

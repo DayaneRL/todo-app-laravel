@@ -46,9 +46,9 @@
                                     <input id="password-confirm" type="password" class="form-control form-control-user" name="password_confirmation" required autocomplete="new-password"  placeholder="Confirmar Senha">
                                 </div>
                             </div>
-                            <a href="login.html" class="btn btn-primary btn-user btn-block">
+                            <button type="submit" class="btn btn-primary btn-user btn-block">
                                 Cadastrar
-                            </a>                       
+                            </button>                       
                         </form>
                         <hr>
                         <div class="text-center">

@@ -1,11 +1,11 @@
 @extends('layouts.template')
 @section('title')
-Dashboard
+Tasks
 @endsection
 @section('content')
 
     <div class="container mb-5">
-        {{-- <h3 class="text-center">Título</h3> --}}
+        <h3 class="text-center">Título</h3>
         <div class="card w-50 text-center m-auto">
             <div class="p-1">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -66,6 +66,5 @@ Dashboard
 @endsection
 
 @section('js')
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 <script src="{{ asset('js/script.js') }}"></script>
 @endsection

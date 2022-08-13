@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\TaskController;
+use App\Http\Controllers\{TaskController, UsersController, DashboardController};
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +19,9 @@ Route::resource('/', TaskController::class);
 Route::patch('/changeStatus/{id}', [TaskController::class, 'changeStatus']);
 Route::delete('/{id}', [TaskController::class, 'destroy']);
 
-Auth::routes();
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('users', UsersController::class)->middleware('role:admin');
+    Route::resource('dashboard', DashboardController::class)->middleware('role:user');
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();
