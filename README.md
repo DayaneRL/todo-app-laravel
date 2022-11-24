@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Projeto em laravel Projeto integrado II ADS
+## Projeto em laravel
 
 Usuário convidados podem cadastrar tarefas que serão perdidas ao atualizar a página.<br/><br/>
 
